@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="//code.jquery.com/jquery.js"></script>
+    <title>Employee Roster</title>
+  </head>
+  <body>
+    <h1>Current Employees</h1>
+    <div class="js-rsvp">
+      List of employees will go here. Need to be on cards. Use bootstrap.
+    </div>
+
+    <script>
+      $.get("/api/rsvp").then(rsvp => {
+        // get raw data //
+        console.log(rsvp);
+
+        // parse data //
+        let allTablesDiv = "";
+        rsvp.forEach(reservation => {
+          let tableDiv = `
+          <div style="margin-top: 24px;">${reservation.customerName}</div>
+          <div>${reservation.customerEmail}</div>
+          <div>${reservation.customerID}</div>
+          <div>${reservation.phoneNumber}</div>
+          `;
+          allTablesDiv += tableDiv;
+        });
+        // render it to html //
+        $(".js-rsvp").html(allTablesDiv);
+      });
+    </script>
+  </body>
+</html>
