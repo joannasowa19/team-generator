@@ -5,32 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="//code.jquery.com/jquery.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
     <title>Employee Roster</title>
   </head>
   <body>
-    <h1>Current Employees</h1>
-    <div class="js-rsvp">
-      List of employees will go here. Need to be on cards. Use bootstrap.
+    <h1 class="jumbotron">Current Employees</h1>
+    <div class="js-manager card">
+      Manager information goes here.
+    </div>
+    <div class="js-engineer card">
+      Engineer information goes here.
+    </div>
+    <div class="js-intern card">
+      Intern information goes here.
     </div>
 
     <script>
-      $.get("/api/rsvp").then(rsvp => {
+      $.get("/api/manager").then(manager => {
         // get raw data //
-        console.log(rsvp);
+        console.log(manager);
 
         // parse data //
-        let allTablesDiv = "";
-        rsvp.forEach(reservation => {
-          let tableDiv = `
-          <div style="margin-top: 24px;">${reservation.customerName}</div>
-          <div>${reservation.customerEmail}</div>
-          <div>${reservation.customerID}</div>
-          <div>${reservation.phoneNumber}</div>
+        let allManagersDiv = "";
+        manager.forEach(employee => {
+          let managerDiv = `
+          <div style="margin-top: 24px;">${employee.managerName}</div>
+          <div>${employee.managerId}</div>
+          <div>${employee.managerEmail}</div>
+          <div>${employee.managerOfficeNumber}</div>
           `;
-          allTablesDiv += tableDiv;
+          allManagersDiv += managerDiv;
         });
         // render it to html //
-        $(".js-rsvp").html(allTablesDiv);
+        $(".js-manager").html(allManagersDiv);
+      });
+      $.get("/api/engineer").then(engineer => {
+        // get raw data //
+        console.log(engineer);
+
+        // parse data //
+        let allEngineersDiv = "";
+        engineer.forEach(employee => {
+          let engineerDiv = `
+          <div style="margin-top: 24px;">${employee.engineerName}</div>
+          <div>${employee.engineerId}</div>
+          <div>${employee.engineerEmail}</div>
+          <div>${employee.engineerOfficeNumber}</div>
+          `;
+          allEngineersDiv += engineerDiv;
+        });
+        // render it to html //
+        $(".js-engineer").html(allEngineersDiv);
+      });
+      $.get("/api/intern").then(intern => {
+        // get raw data //
+        console.log(intern);
+
+        // parse data //
+        let allInternsDiv = "";
+        intern.forEach(employee => {
+          let internDiv = `
+          <div style="margin-top: 24px;">${employee.internName}</div>
+          <div>${employee.internId}</div>
+          <div>${employee.internEmail}</div>
+          <div>${employee.internOfficeNumber}</div>
+          `;
+          allInternsDiv += internDiv;
+        });
+        // render it to html //
+        $(".js-intern").html(allInternsDiv);
       });
     </script>
   </body>

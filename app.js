@@ -238,26 +238,7 @@ function appMenu() {
         }
       });
   }
-  function addEngineer() {
-    inquirer
-      .prompt([
-        /* prompts here */
-      ])
-      .then(answers => {
-        /* create engineer */
-        createTeam();
-      });
-  }
-  function addIntern() {
-    inquirer
-      .prompt([
-        /* prompts here */
-      ])
-      .then(answers => {
-        /* create interin */
-        createTeam();
-      });
-  }
+
   function buildTeam() {
     let htmlString = "";
     let headHTML = ``;
@@ -267,5 +248,7 @@ function appMenu() {
     fs.writeFileSync("team.html", htmlString, "utf-8");
   }
   createManager();
+  createEngineer();
+  createIntern();
 }
 appMenu();
